@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <link rel="stylesheet" href="stylesss.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Registration Form</h1>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="firstName">Student Name</label>
+                <div class="flex-container">
+                    <input type="text" id="firstName" placeholder="First Name" required>
+                    <input type="text" id="middleName" placeholder="Middle Name">
+                    <input type="text" id="lastName" placeholder="Last Name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Birth Date</label>
+                <div class="flex-container">
+                    <select id="birthMonth" required>
+                        <option value="">Month</option>
+                        <!-- Add month options here -->
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    
+                    </select>
+                    <select id="birthDay" required>
+                        <option value="day">Day</option>
+                        <script>
+                            for (let i = 1; i <= 31; i++) {
+                                document.write(`<option value="${i}">${i}</option>`);
+                            }
+                        </script>
+                     
+                    </select>
+                    <select id="date" required>
+                        <option value="">Year</option>
+                        <!-- Add year options here -->
+                        <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = currentYear - 50; i <= currentYear; i++) {
+                            document.write(`<option value="${i}">${i}</option>`);
+                        }
+                        </script>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" required>
+                    <option value="">Please Select</option>
+                    <option value="gender">male</option>
+                    <option value="gender">female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="streetAddress" placeholder="Street Address" required>
+                <input type="text" id="streetAddress2" placeholder="Street Address Line 2">
+                <div class="flex-container">
+                    <input type="text" id="city" placeholder="City" required>
+                    <input type="text" id="state" placeholder="State / Province" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Student E-mail</label>
+                <input type="email" id="email" placeholder="example@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="flex-container">
+                    <input type="tel" id="phone" placeholder="(000) 000-0000" required>
+                    <input type="tel" id="workPhone" placeholder="(000) 000-0000">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" placeholder="Company">
+            </div>
+            <div class="form-group">
+                <label for="courses">Courses</label>
+                <select id="courses" required>
+                    <option value="">Please Select</option>
+                    <!-- Add course options here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comments">Additional Comments</label>
+                <textarea id="comments" rows="4" placeholder="Additional Comments"></textarea>
+            </div>
+            <div class="form-group flex-container">
+                <button type="submit">Submit Application</button>
+                <button type="button" id="clearButton">Clear Fields</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+
+    <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let isValid = true;
+        const requiredFields = document.querySelectorAll('input:required, select:required, textarea:required');
+        
+        requiredFields.forEach(function(field) {
+            if (!field.value) {
+                isValid = false;
+                field.style.borderColor = 'red';
+            } else {
+                field.style.borderColor = '#ccc';
+            }
+        });
+    
+        if (isValid) {
+            alert('Form submitted successfully!');
+        } else {
+            alert('Please fill in all required fields.');
+        }
+    });
+    
+    document.getElementById('clearButton').addEventListener('click', function() {
+        const form = document.getElementById('registrationForm');
+        form.reset();
+        const fields = document.querySelectorAll('input, select, textarea');
+        fields.forEach(function(field) {
+            field.style.borderColor = '#ccc';
+        });
+    });
+    </script>
+</body>
+</html>
